@@ -1,0 +1,85 @@
+package ${package}.service.impl;
+
+import org.king.rental.base.page.PageHelper;
+import org.king.rental.base.utils.Utils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
+import lombok.extern.slf4j.Slf4j;
+import org.king.rental.base.page.Page;
+import org.king.rental.base.utils.Query;
+
+import java.util.List;
+import java.util.Map;
+
+import ${package}.dao.${className}Dao;
+import ${package}.entity.${className}Entity;
+import ${package}.service.${className}Service;
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+@Slf4j
+@Service("${classname}Service")
+public class ${className}ServiceImpl implements ${className}Service {
+    @Autowired
+    private ${className}Dao ${classname}Dao;
+
+    @Override
+    public ${className}Entity queryObject(${pk.attrType} ${pk.attrname}){
+        return ${classname}Dao.queryObject(${pk.attrname});
+    }
+
+    @Override
+    public Page queryListPage(Map<String, Object> map){
+        Query query = (Query) map;
+        PageHelper.startPage(query.getPage(), query.getLimit());
+        ${classname}Dao.queryList(map);
+        return PageHelper.endPage();
+    }
+
+    @Override
+    public List<${className}Entity> queryList(Map<String, Object> map){
+        return ${classname}Dao.queryList(map);
+    }
+
+    @Override
+    public List<${className}Entity> queryListByBean(${className}Entity entity) {
+        return ${classname}Dao.queryListByBean(entity);
+    }
+
+    @Override
+    public int queryTotal(Map<String, Object> map){
+        return ${classname}Dao.queryTotal(map);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public int save(${className}Entity ${classname}){
+        ${classname}.setId(Utils.uuid());
+        return ${classname}Dao.save(${classname});
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public int update(${className}Entity ${classname}){
+        return ${classname}Dao.update(${classname});
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public int delete(${pk.attrType} ${pk.attrname}){
+        return ${classname}Dao.delete(${pk.attrname});
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public int deleteBatch(${pk.attrType}[] ${pk.attrname}s){
+        return ${classname}Dao.deleteBatch(${pk.attrname}s);
+    }
+
+}

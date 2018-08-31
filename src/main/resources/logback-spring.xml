@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--please pay attention that: file name should not be logback.xml，name it logback-spring.xml to use it in springboot framework-->
+<configuration>
+
+    <springProperty scope="context" name="logging.path" source="logback.logging.path"/>
+    <springProperty scope="context" name="logging.level" source="logging.level.com.king"/>
+
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %green(%-5level) %magenta(${PID:- }) --- [%15.15t] %cyan(%logger{80}) - %highlight(%msg%n)</pattern>
+        </encoder>
+    </appender>
+
+    <!--<logger name="com.innjia" level="${logging.level}" additivity="false">-->
+        <!--<appender-ref ref="STDOUT"/>-->
+        <!--<appender-ref ref="ROOT-APPENDER"/>-->
+        <!--<appender-ref ref="ERROR-APPENDER"/>-->
+    <!--</logger>-->
+
+    <logger name="com.alipay.remoting.DefaultConnectionManager" level="OFF"/>
+
+    <root level="${logging.level}">
+        <appender-ref ref="STDOUT"/>
+        <!--<appender-ref ref="ROOT-APPENDER"/>-->
+        <!--<appender-ref ref="ERROR-APPENDER"/>-->
+    </root>
+
+</configuration>
